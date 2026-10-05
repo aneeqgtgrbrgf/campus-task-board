@@ -10,6 +10,16 @@ function TaskCard(props){
             <span className="task-category">
             <p> Category :  {props.category}</p>
             </span>
+            <div className="task-action">
+                <label>
+                    <input type="checkbox"
+                    checked={props.completed}
+                    onChange={props.onComplete}
+                    />
+                    {props.completed ? "Completed":"Complete"}
+                </label>
+                <button className="delete-button" onClick={props.onDelete}> Delete </button>
+            </div>
         </div>
         </div>
     );

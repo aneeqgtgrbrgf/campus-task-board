@@ -8,16 +8,19 @@ function App() {
       id: 1,
       title: 'Complete React Lab',
       category: 'Programming',
+      completed: false,
     },
     {
       id:2,
       title:'Study Database',
       category:'Database',
+      completed: false,
     },
     {
       id:3,
       title:'Prepare Presentation',
-      category:'University'
+      category:'University',
+      completed:false,
     }, 
   ]);
   const[newTask,setNewTask] =useState(" ");
@@ -32,10 +35,23 @@ function App() {
       const task = {
         id: Date.now(),
         title: newTask,
-        category : "general"
+        category : "General",
+        completed:false,
       };
       setTasks([...tasks,task]);
       setNewTask("");
+    }
+    function completeTask(id){
+      setTasks(
+        tasks.map(task => 
+          task.id === id 
+          ?{...task,completed: !task.completed}:task)
+      );
+    }
+    function deleteTask(id){
+      setTasks(
+        tasks.filter(task => task.id!== id)
+      );
     }
   return (
     <div className="App">
@@ -64,6 +80,9 @@ function App() {
           key={task.id}
           title={task.title}
           category={task.category}
+          completed={task.completed}
+          onComplete={() => completeTask(task.id)}
+          onDelete={() => deleteTask(task.id)}
         />
       ))}
       </div>

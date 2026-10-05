@@ -6,19 +6,19 @@ function App() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: 'complete react lab',
-      category: 'programming',
+      title: 'Complete React Lab',
+      category: 'Programming',
     },
     {
       id:2,
-      title:'study database',
-      category:'databse',
+      title:'Study Database',
+      category:'Database',
     },
     {
       id:3,
-      title:'prepare presentation',
+      title:'Prepare Presentation',
       category:'University'
-    },
+    }, 
   ]);
   const[newTask,setNewTask] =useState(" ");
   useEffect(()=>{
@@ -26,7 +26,7 @@ function App() {
     console.log("Total number of Tasks:", tasks.length);
   },[tasks]);
     function addTask(){
-      if(newTask.trim() === " "){
+      if(newTask.trim() === ""){
         return;
       }
       const task = {
@@ -39,16 +39,26 @@ function App() {
     }
   return (
     <div className="App">
+      <header className="header">
       <h1 >Campus Task Board</h1>
+      <p>Stay Organized, Stay Ahead</p>
+      </header>
+      <div>
       <input
       type="text"
-      placeholder="Enter task here"
+      placeholder="Enter a new Task ..."
       value={newTask}
       onChange={(e) => setNewTask(e.target.value)}
       />
       <button onClick={addTask}>
-        Add task
+        + Add task
       </button>
+      </div>
+      <div className="task-heading">
+        <h2>Your Tasks</h2>
+        <span>{tasks.length} Tasks</span>
+      </div>
+      <div className="tasks">
       {tasks.map((task) => (
         <TaskCard
           key={task.id}
@@ -56,6 +66,7 @@ function App() {
           category={task.category}
         />
       ))}
+      </div>
     </div>
   );
 }
